@@ -1177,10 +1177,10 @@ input,textarea,select{background:rgba(255,255,255,.045) !important;border:1px so
         <input type="hidden" name="_subject" value="Nieuwe website aanvraag — Online Web Bouwers">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://example.com/?contact=success">
+        
         <div class="form-group">
           <label>Naam</label>
-          <input type="text" name="naam" placeholder="Jouw naam" required>
+          <input type="text" name="name" placeholder="Jouw naam" required>
         </div>
         <div class="form-group">
           <label>E-mailadres</label>
@@ -1188,7 +1188,7 @@ input,textarea,select{background:rgba(255,255,255,.045) !important;border:1px so
         </div>
         <div class="form-group full">
           <label>Waar gaat het om?</label>
-          <select>
+          <select name="project_type" required>
             <option>Maak een keuze</option>
             <option>Website voor mijn bedrijf</option>
             <option>Website voor persoonlijk gebruik</option>
@@ -1197,7 +1197,7 @@ input,textarea,select{background:rgba(255,255,255,.045) !important;border:1px so
         </div>
         <div class="form-group full">
           <label>Bericht</label>
-          <textarea name="bericht" placeholder="Vertel ons kort over wat je nodig hebt..." required></textarea>
+          <textarea name="message" placeholder="Vertel ons kort over wat je nodig hebt..." required></textarea>
         </div>
         <div class="form-group full">
           <button type="submit" class="btn btn-primary">Verstuur bericht <i class="fa-solid fa-paper-plane"></i></button>
@@ -1325,15 +1325,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
 });
 
 const contactForm = document.getElementById('contactForm');
-const params = new URLSearchParams(window.location.search);
-if (params.get('contact') === 'success') {
-  const notice = document.createElement('div');
-  notice.setAttribute('role','status');
-  notice.style.cssText = 'margin-top:14px;padding:13px 16px;border:1px solid rgba(245,196,81,.35);border-radius:12px;background:rgba(245,196,81,.08);color:#fff;font-size:12px;';
-  notice.innerHTML = '<i class="fa-solid fa-circle-check"></i> Nieuwe e-mail aanvraag verstuurd naar info.onlinewebbouwers@gmail.com.';
-  contactForm.appendChild(notice);
-  history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-}
 contactForm.addEventListener('submit', () => {
   const button = contactForm.querySelector('button');
   button.disabled = true;
