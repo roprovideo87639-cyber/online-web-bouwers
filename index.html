@@ -861,6 +861,25 @@ section {
 
 </style>
 
+
+<style id="fluid-glass-design">
+:root{--glass-bg:rgba(255,255,255,.055);--glass-border:rgba(255,255,255,.14);--glass-highlight:rgba(255,255,255,.22);--glass-shadow:0 24px 80px rgba(0,0,0,.34);--glass-blur:blur(24px) saturate(145%)}
+body{background:radial-gradient(circle at 12% 8%,rgba(245,196,81,.10),transparent 28%),radial-gradient(circle at 88% 30%,rgba(100,150,255,.08),transparent 30%),radial-gradient(circle at 45% 90%,rgba(245,196,81,.055),transparent 32%),#07090d}
+nav,.pricing-card,.edition-detail,.video-example,.process-card,.team-card,.faq-item,.contact-card,.hero-card,footer{background:linear-gradient(135deg,rgba(255,255,255,.095),rgba(255,255,255,.025)) !important;border:1px solid var(--glass-border) !important;box-shadow:var(--glass-shadow),inset 0 1px 0 var(--glass-highlight);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur)}
+.pricing-card,.edition-detail,.video-example{position:relative;overflow:hidden}
+.pricing-card::after,.edition-detail::after,.video-example::after{content:"";position:absolute;width:240px;height:240px;left:var(--mx,50%);top:var(--my,20%);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,.13),transparent 68%);pointer-events:none;opacity:0;transition:opacity .35s ease;mix-blend-mode:screen}
+.pricing-card:hover::after,.edition-detail:hover::after,.video-example:hover::after{opacity:1}
+.pricing-card{transform:translateY(0) scale(1);transition:transform .65s cubic-bezier(.16,1,.3,1),border-color .5s ease,box-shadow .65s ease,background .5s ease}
+.pricing-card:hover{transform:translateY(-10px) scale(1.012);border-color:rgba(245,196,81,.42) !important;box-shadow:0 35px 100px rgba(0,0,0,.45),0 0 45px rgba(245,196,81,.07),inset 0 1px 0 rgba(255,255,255,.25)}
+.pricing-image{background:rgba(255,255,255,.035) !important}.pricing-image img{opacity:.78;filter:saturate(.72) contrast(1.05);transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .7s ease,filter .7s ease}.pricing-card:hover .pricing-image img{opacity:.92;transform:scale(1.08);filter:saturate(1) contrast(1.08)}
+nav{border-radius:18px;margin:12px 18px;background:rgba(10,13,19,.58) !important}
+.btn-primary{background:linear-gradient(135deg,rgba(245,196,81,.95),rgba(217,164,49,.84)) !important;box-shadow:0 12px 35px rgba(245,196,81,.18),inset 0 1px 0 rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.25) !important;transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s ease}.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 45px rgba(245,196,81,.25),inset 0 1px 0 rgba(255,255,255,.45)}
+input,textarea,select{background:rgba(255,255,255,.045) !important;border:1px solid rgba(255,255,255,.12) !important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}input:focus,textarea:focus,select:focus{border-color:rgba(245,196,81,.5) !important;box-shadow:0 0 0 4px rgba(245,196,81,.07),inset 0 1px 0 rgba(255,255,255,.12);outline:none}
+::selection{background:rgba(245,196,81,.28);color:#fff}
+@keyframes glassFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-5px,0)}}.edition-detail:nth-child(1){animation:glassFloat 7s ease-in-out infinite}.edition-detail:nth-child(2){animation:glassFloat 8s ease-in-out .6s infinite}.edition-detail:nth-child(3){animation:glassFloat 7.5s ease-in-out 1.1s infinite}
+@media(max-width:900px){nav{margin:8px 10px}.edition-detail:nth-child(n){animation:none}}
+</style>
+<script>document.addEventListener('pointermove',function(e){document.querySelectorAll('.pricing-card,.edition-detail,.video-example').forEach(function(card){var r=card.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){card.style.setProperty('--mx',(e.clientX-r.left)+'px');card.style.setProperty('--my',(e.clientY-r.top)+'px')}})});</script>
 </head>
 <body>
 
@@ -1154,14 +1173,18 @@ section {
           Meestal binnen 1-2 werkdagen
         </div>
       </div>
-      <form class="booking-form" id="contactForm">
+      <form class="booking-form" id="contactForm" action="https://formsubmit.co/info.onlinewebbouwers@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nieuwe website aanvraag — Online Web Bouwers">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://example.com/?contact=success">
         <div class="form-group">
           <label>Naam</label>
-          <input type="text" placeholder="Jouw naam" required>
+          <input type="text" name="naam" placeholder="Jouw naam" required>
         </div>
         <div class="form-group">
           <label>E-mailadres</label>
-          <input type="email" placeholder="jouw@email.nl" required>
+          <input type="email" name="email" placeholder="jouw@email.nl" required>
         </div>
         <div class="form-group full">
           <label>Waar gaat het om?</label>
@@ -1174,7 +1197,7 @@ section {
         </div>
         <div class="form-group full">
           <label>Bericht</label>
-          <textarea placeholder="Vertel ons kort over wat je nodig hebt..." required></textarea>
+          <textarea name="bericht" placeholder="Vertel ons kort over wat je nodig hebt..." required></textarea>
         </div>
         <div class="form-group full">
           <button type="submit" class="btn btn-primary">Verstuur bericht <i class="fa-solid fa-paper-plane"></i></button>
@@ -1302,12 +1325,19 @@ document.querySelectorAll('.faq-question').forEach(question => {
 });
 
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+const params = new URLSearchParams(window.location.search);
+if (params.get('contact') === 'success') {
+  const notice = document.createElement('div');
+  notice.setAttribute('role','status');
+  notice.style.cssText = 'margin-top:14px;padding:13px 16px;border:1px solid rgba(245,196,81,.35);border-radius:12px;background:rgba(245,196,81,.08);color:#fff;font-size:12px;';
+  notice.innerHTML = '<i class="fa-solid fa-circle-check"></i> Nieuwe e-mail aanvraag verstuurd naar info.onlinewebbouwers@gmail.com.';
+  contactForm.appendChild(notice);
+  history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+}
+contactForm.addEventListener('submit', () => {
   const button = contactForm.querySelector('button');
-  const original = button.innerHTML;
-  button.innerHTML = '<i class="fa-solid fa-check"></i> Bericht verstuurd';
-  setTimeout(() => { button.innerHTML = original; contactForm.reset(); }, 3000);
+  button.disabled = true;
+  button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Versturen...';
 });
 </script>
 
